@@ -20,8 +20,6 @@ new Vue({
       let attackNum = Math.floor(Math.random() * 10) + 1;
       const hurtyNum = Math.floor(Math.random() * attackNum);
 
-
-      // create github repo for this and commit and pr 5 times for hacktober
       if (special === true && this.playerTurn === true && this.player.specialAttack > 0) {
         attackNum *= 2;
         this.specialAttackTrack();
@@ -38,7 +36,6 @@ new Vue({
       this.playerTurn = !this.playerTurn;
     },
     specialAttackTrack() {
-
       if (this.playerTurn === true && this.player.specialAttack > 0) {
         this.player.specialAttack -= 1;
       } else if (this.playerTurn === false && this.monster.specialAttack > 0) {
@@ -56,7 +53,6 @@ new Vue({
         `${healedPlayer} healed ${healNum}% damage`,
         ''
       )
-
       this.playerTurn = !this.playerTurn;
     },
     giveUp() {
