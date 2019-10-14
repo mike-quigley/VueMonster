@@ -16,6 +16,7 @@
         <div class="col-sm-6 text-center">
           <div class="card">
             {{player.name}} <br />
+            Special Attacks: {{player.specialAttack}}<br />
             <strong>Health:</strong>
             <div class="health-bar-wrap">
               <div class="player-health" :style="{width: player.health + '%'}">
@@ -29,6 +30,7 @@
           <div class="card">
 
             {{monster.name}}<br />
+            Special Attacks: {{monster.specialAttack}}<br />
             <strong>Health:</strong>
             <div class="health-bar-wrap">
               <div class="monster-health" :style="{width: monster.health + '%'}">
@@ -43,7 +45,7 @@
       <div class="row">
         <div class="col-sm-12">
 
-          <template v-if="turn">
+          <template v-if="playerTurn">
             <strong>{{player.name}}, take an action:</strong>
           </template>
           <template v-else>
@@ -52,9 +54,14 @@
           <div class="row">
             <div class="col-sm-3">
               <button @click="attack()">Attack</button></div>
-            <div class="col-sm-3">
-              <button @click="attack(true)">Special Attak</button>
-            </div>
+
+            <template
+              v-if="playerTurn === true && player.specialAttack > 0 || playerTurn === false && monster.specialAttack > 0">
+              <div class="col-sm-3">
+                <button @click="attack(true)">Special Attak</button>
+              </div>
+            </template>
+
             <div class="col-sm-3">
               <button>Heal</button>
             </div>
