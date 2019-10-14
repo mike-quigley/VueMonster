@@ -3,87 +3,80 @@
 <head>
   <title>Monster Game</title>
   <script src="https://npmcdn.com/vue/dist/vue.js"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
-  <div id="app">
+  <div id="app" class="app-container">
 
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6 text-center">
-          <div class="card">
-            {{player.name}} <br />
-            Special Attacks: {{player.specialAttack}}<br />
-            <strong>Health:</strong>
-            <div class="health-bar-wrap">
-              <div class="player-health" :style="{width: player.health + '%'}">
-                {{player.health}}%
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-sm-6 text-center">
-          <div class="card">
-
-            {{monster.name}}<br />
-            Special Attacks: {{monster.specialAttack}}<br />
-            <strong>Health:</strong>
-            <div class="health-bar-wrap">
-              <div class="monster-health" :style="{width: monster.health + '%'}">
-                {{monster.health}}%
-              </div>
+    <div class="card-container">
+      <div class="player-card">
+        <div class="card">
+          <h3>{{player.name}}</h3>
+          Special Attacks: {{player.specialAttack}}<br />
+          <div class="health-title">Health:</div>
+          <div class="health-bar-wrap">
+            <div class="player-health" :style="{width: player.health + '%'}">
+              <span>{{player.health}}%</span>
             </div>
           </div>
         </div>
       </div>
-      <!--end row-->
 
-      <div class="row">
-        <div class="col-sm-12">
-
-          <template v-if="playerTurn">
-            <strong>{{player.name}}, take an action:</strong>
-          </template>
-          <template v-else>
-            <strong>{{monster.name}}, take an action:</strong>
-          </template>
-          <div class="row">
-            <div class="col-sm-3">
-              <button @click="attack()">Attack</button></div>
-
-            <template
-              v-if="playerTurn === true && player.specialAttack > 0 || playerTurn === false && monster.specialAttack > 0">
-              <div class="col-sm-3">
-                <button @click="attack(true)">Special Attak</button>
-              </div>
-            </template>
-
-            <div class="col-sm-3">
-              <button>Heal</button>
+      <div class="player-card">
+        <div class="card">
+          <h3>{{monster.name}}</h3>
+          Special Attacks: {{monster.specialAttack}}<br />
+          <div class="health-title">Health:</div>
+          <div class="health-bar-wrap">
+            <div class="monster-health" :style="{width: monster.health + '%'}">
+              <span>{{monster.health}}%</span>
             </div>
-            <div class="col-sm-3">
-              <button @click="giveUp()">Give Up</button>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="jumbotron">
-            <!--add max height and scroll-->
-            <ul>
-              <li v-for="text in history">{{text}}</li>
-            </ul>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="player-actions">
+
+      <template v-if="playerTurn">
+        <strong>{{player.name}}, take an action:</strong>
+      </template>
+      <template v-else>
+        <strong>{{monster.name}}, take an action:</strong>
+      </template>
+
+
+      <div class="actions-row">
+        <div class="move-button">
+          <button @click="attack()" class="attack-button">Attack</button></div>
+
+        <template
+          v-if="playerTurn === true && player.specialAttack > 0 || playerTurn === false && monster.specialAttack > 0">
+          <div class="move-button">
+            <button @click="attack(true)" class="special-attack-button">Special Attak</button>
+          </div>
+        </template>
+
+        <div class="move-button">
+          <button @click="heal()">Heal</button>
+        </div>
+        <div class="move-button">
+          <button @click="giveUp()">Give Up</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!--add max height and scroll-->
+    <ul class="action-list">
+      <li v-for="text in history">{{text}}</li>
+    </ul>
+
+
+
   </div>
 
   <script src="./app.js"></script>

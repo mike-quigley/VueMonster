@@ -34,6 +34,7 @@ new Vue({
       this.playerTurn === true ? this.player.health -= hurtyNum : this.monster.health -= hurtyNum;
 
       this.createHistory(attackNum, hurtyNum)
+      this.checkScore();
       this.playerTurn = !this.playerTurn;
     },
     specialAttackTrack() {
@@ -44,11 +45,27 @@ new Vue({
         this.monster.specialAttack -= 1;
       }
     },
+    heal() {
+      let healNum = Math.floor(Math.random() * 10) + 1;
+
+      this.playerTurn === true ? this.player.health += healNum : this.monster.health += healNum;
+
+      const healedPlayer = this.playerTurn ? this.player.name : this.monster.name
+
+      this.history.unshift(
+        `${healedPlayer} healed ${healNum}% damage`,
+        ''
+      )
+
+      this.playerTurn = !this.playerTurn;
+    },
     giveUp() {
       const giveUpConfirm = confirm("Reset Game?")
       if (giveUpConfirm) {
         this.player.health = 100;
         this.monster.health = 100;
+        this.player.specialAttack = 1;
+        this.monster.specialAttack = 1;
         this.history = [];
       }
     },
@@ -57,10 +74,19 @@ new Vue({
       const attacker = this.playerTurn ? this.player.name : this.monster.name;
       const atackee = this.playerTurn ? this.monster.name : this.player.name;
 
-      this.history.push(
+      this.history.unshift(
         `${atackee} took ${attackNum}% damage`,
-        `${attacker} took ${hurtyNum}% damage in replayerTurn`
+        `${attacker} took ${hurtyNum}% damage`
       )
+    },
+    checkScore() {
+      if (this.player.health <= 0) {
+        alert("Monster Won, you dead!")
+      } else if (this.monster.health <= 0) {
+        alert(`You killed ${this.monster.name}!`)
+      } else {
+        return;
+      }
     }
   }
 })
