@@ -84,6 +84,11 @@ new Vue({
         alert("Monster Won, you dead!")
       } else if (this.monster.health <= 0) {
         alert(`You killed ${this.monster.name}!`)
+        this.player.health = 100;
+        this.monster.health = 100;
+        this.player.specialAttack = 1;
+        this.monster.specialAttack = 1;
+        this.history = [];
       } else {
         return;
       }
