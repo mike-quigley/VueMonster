@@ -1,17 +1,121 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.app-container {
+  width: 1000px;
+  margin: auto;
+}
+
+.card-container {
+  width: 100%;
+}
+
+.card-container:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.player-card:nth-child(1) {
+  float: left;
+  width: 48%;
+}
+
+.player-card:nth-child(2) {
+  float: right;
+  width: 48%;
+}
+
+.player-card > .card {
+  padding: 25px;
+  background: #f3f3f3;
+}
+
+.health-title {
+  margin-top: 15px;
+}
+
 .health-bar-wrap {
   background: #ccc;
   width: 100%;
-  height: 25px;
 }
 
 .player-health {
   background: green;
   color: #fff;
-  height: 25px;
+  padding: 10px 0;
+  max-width: 100%;
+}
+
+.player-health > span {
+  display: block;
+  margin-left: 10px;
 }
 
 .monster-health {
   background: red;
   color: #fff;
-  height: 25px;
+  padding: 10px 0;
+  max-width: 100%;
+}
+
+.monster-health > span {
+  display: block;
+  margin-left: 10px;
+}
+
+.player-actions {
+  margin-top: 15px;
+}
+
+.actions-row {
+  display: flex;
+}
+
+.move-button {
+  flex: 1;
+  text-align: center;
+}
+
+.move-button > button {
+  width: 100%;
+  margin: auto;
+  padding: 10px 15px;
+}
+
+.action-list {
+  padding: 0;
+}
+
+.action-list li {
+  list-style: none;
+}
+
+.action-list li:nth-child(4n) {
+  padding: 0 15px 10px;
+  margin-bottom: 15px;
+}
+
+.action-list li:nth-child(4n-1) {
+  padding: 10px 15px 0;
+}
+
+.action-list li:nth-child(4n),
+.action-list li:nth-child(4n-1) {
+  background: #dcdcdc;
+}
+
+.action-list li:nth-child(4n-2) {
+  padding: 0 15px 10px;
+  margin-bottom: 15px;
+}
+
+.action-list li:nth-child(4n-3) {
+  padding: 10px 15px 0;
+}
+
+.action-list li:nth-child(4n-2),
+.action-list li:nth-child(4n-3) {
+  background: #c0c0c0;
 }
