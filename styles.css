@@ -86,6 +86,8 @@ body {
 
 .action-list {
   padding: 0;
+  max-height: 400px;
+  overflow: scroll;
 }
 
 .action-list li {
