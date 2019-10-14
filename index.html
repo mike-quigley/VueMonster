@@ -1,0 +1,85 @@
+<html>
+
+<head>
+  <title>Monster Game</title>
+  <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div id="app">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 text-center">
+          <div class="card">
+            {{player.name}} <br />
+            <strong>Health:</strong>
+            <div class="health-bar-wrap">
+              <div class="player-health" :style="{width: player.health + '%'}">
+                {{player.health}}%
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 text-center">
+          <div class="card">
+
+            {{monster.name}}<br />
+            <strong>Health:</strong>
+            <div class="health-bar-wrap">
+              <div class="monster-health" :style="{width: monster.health + '%'}">
+                {{monster.health}}%
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--end row-->
+
+      <div class="row">
+        <div class="col-sm-12">
+
+          <template v-if="turn">
+            <strong>{{player.name}}, take an action:</strong>
+          </template>
+          <template v-else>
+            <strong>{{monster.name}}, take an action:</strong>
+          </template>
+          <div class="row">
+            <div class="col-sm-3">
+              <button @click="attack()">Attack</button></div>
+            <div class="col-sm-3">
+              <button @click="attack(true)">Special Attak</button>
+            </div>
+            <div class="col-sm-3">
+              <button>Heal</button>
+            </div>
+            <div class="col-sm-3">
+              <button @click="giveUp()">Give Up</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="jumbotron">
+            <!--add max height and scroll-->
+            <ul>
+              <li v-for="text in history">{{text}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+
+</html>
